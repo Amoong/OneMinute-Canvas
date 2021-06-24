@@ -21,9 +21,10 @@
 
       let x = 10;
       let count = 0;
+      let timerId;
 
       function draw() {
-        if (count % 30 === 0) {
+        if (count % 2 === 0) {
           context.clearRect(0, 0, canvas.width, canvas.height);
           context.beginPath();
           context.arc(x, 150, 10, 0, Math.PI * 2, false);
@@ -31,8 +32,21 @@
           x += 3;
         }
         count++;
-        requestAnimationFrame(draw);
+
+        // if (x >= canvas.width - 100) {
+        //   return;
+        // }
+
+        timerId = requestAnimationFrame(draw);
+
+        // if (x >= canvas.width - 10) {
+        //   cancelAnimationFrame(timerId);
+        // }
       }
+
+      canvas.addEventListener("click", () => {
+        cancelAnimationFrame(timerId);
+      });
 
       draw();
     </script>
